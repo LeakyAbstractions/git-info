@@ -1,0 +1,6 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+
+Name: git-info
+Description: Generate a header file with GIT information
+Version: @VERSION@
