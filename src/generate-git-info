@@ -14,7 +14,7 @@ GENERATED_FILE=${1:-deps/git-info.h}
 echo "Extracting info from GIT repository..."
 GENERATION_DATE=`                   date -Iminute`
 GIT_INFO_ORIGIN=`                   git remote get-url origin 2>/dev/null`
-GIT_INFO_BRANCH=`                   git symbolic-ref --short HEAD 2>/dev/null`
+GIT_INFO_BRANCH=`                   git status -bsuno 2>/dev/null | head -n 1 | grep -oP '(?<=## )(.*)(?=\.\.\..*)?'`
 GIT_INFO_HASH=`                     git log -1 --format=%H 2>/dev/null`
 GIT_INFO_TAG=`                      git log -1 --format=%d 2>/dev/null | grep -oP '(?<=tag\: )(.+?)(?=[,\)])' | head -n1`
 GIT_INFO_SUBJECT=`                  git log -1 --format=%s 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
