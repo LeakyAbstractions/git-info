@@ -54,10 +54,10 @@ cat > $GENERATED_FILE <<- EOF
 #define GIT_INFO_TAG                    "$GIT_INFO_TAG"
 #define GIT_INFO_SUBJECT                "$GIT_INFO_SUBJECT"
 #define GIT_INFO_BODY                   \\
-$GIT_INFO_BODY
+${GIT_INFO_BODY:-    \\}
     ""
 #define GIT_INFO_NOTES                  \\
-$GIT_INFO_NOTES
+${GIT_INFO_NOTES:-    \\}
     ""
 #define GIT_INFO_AUTHOR_NAME            "$GIT_INFO_AUTHOR_NAME"
 #define GIT_INFO_AUTHOR_EMAIL           "$GIT_INFO_AUTHOR_EMAIL"
