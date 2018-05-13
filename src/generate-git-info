@@ -18,8 +18,8 @@ GIT_INFO_BRANCH=`                   git symbolic-ref --short HEAD 2>/dev/null`
 GIT_INFO_HASH=`                     git log -1 --format=%H 2>/dev/null`
 GIT_INFO_TAG=`                      git log -1 --format=%d 2>/dev/null | grep -oP '(?<=tag\: )(.+?)(?=[,\)])' | head -n1`
 GIT_INFO_SUBJECT=`                  git log -1 --format=%s 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
-GIT_INFO_BODY=`                     git log -1 --format=%b 2>/dev/null | tr "\42" "'" | tr "\134" "/" | sed 's/^/    "/' | sed 's/$/\\\\n" \\\\/' | sed 's/"\\\\n" //'`
-GIT_INFO_NOTES=`                    git log -1 --format=%N 2>/dev/null | tr "\42" "'" | tr "\134" "/" | sed 's/^/    "/' | sed 's/$/\\\\n" \\\\/' | sed 's/"\\\\n" //'`
+GIT_INFO_BODY=`                     git log -1 --format=%b 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
+GIT_INFO_NOTES=`                    git log -1 --format=%N 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
 GIT_INFO_AUTHOR_NAME=`              git log -1 --format=%an 2>/dev/null`
 GIT_INFO_AUTHOR_EMAIL=`             git log -1 --format=%ae 2>/dev/null`
 GIT_INFO_AUTHOR_TIMESTAMP=`         git log -1 --format=%at 2>/dev/null`
@@ -49,6 +49,14 @@ if [ -z "$GIT_INFO_BRANCH" ]; then
     fi
 fi
 
+# Handle multiline fields
+if [ -n "$GIT_INFO_BODY" ]; then
+    GIT_INFO_BODY=`echo "$GIT_INFO_BODY" | sed -E 's/(.+)/    "\1\\\n" \\\/' | sed -Ez 's/(.*) \\\[\r\n]?/\1/' | tr -d '\r'`
+fi
+if [ -n "$GIT_INFO_NOTES" ]; then
+    GIT_INFO_NOTES=`echo "$GIT_INFO_NOTES" | sed -E 's/(.+)/    "\1\\\n" \\\/' | sed -Ez 's/(.*) \\\[\r\n]?/\1/' | tr -d '\r'`
+fi
+
 #
 # Generates file
 #
@@ -70,11 +78,9 @@ cat > $GENERATED_FILE <<- EOF
 #define GIT_INFO_TAG                    "$GIT_INFO_TAG"
 #define GIT_INFO_SUBJECT                "$GIT_INFO_SUBJECT"
 #define GIT_INFO_BODY                   \\
-${GIT_INFO_BODY:-    \\}
-    ""
+${GIT_INFO_BODY:-    `echo '""'`}
 #define GIT_INFO_NOTES                  \\
-${GIT_INFO_NOTES:-    \\}
-    ""
+${GIT_INFO_NOTES:-    `echo '""'`}
 #define GIT_INFO_AUTHOR_NAME            "$GIT_INFO_AUTHOR_NAME"
 #define GIT_INFO_AUTHOR_EMAIL           "$GIT_INFO_AUTHOR_EMAIL"
 #define GIT_INFO_AUTHOR_TIMESTAMP       "$GIT_INFO_AUTHOR_TIMESTAMP"
