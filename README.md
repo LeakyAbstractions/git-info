@@ -83,10 +83,10 @@ access the defined macros containing repository info:
 #define GIT_INFO_TAG                    ""
 #define GIT_INFO_SUBJECT                "Initial commit"
 #define GIT_INFO_BODY                   \
-    \
-    ""
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" \
+    "Nulla eu mi mauris. Sed nec consectetur velit.\n" \
+    "In vulputate lorem sed mattis auctor. Donec sed accumsan nisl.\n"
 #define GIT_INFO_NOTES                  \
-    \
     ""
 #define GIT_INFO_AUTHOR_NAME            "Guillermo Calvo"
 #define GIT_INFO_AUTHOR_EMAIL           "guillermocalvo@yahoo.com"
