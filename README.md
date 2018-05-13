@@ -1,4 +1,7 @@
 
+[![Last release](https://img.shields.io/github/release/LeakyAbstractions/git-info.svg)](https://github.com/LeakyAbstractions/git-info/releases)
+[![Build status](https://travis-ci.org/LeakyAbstractions/git-info.svg?branch=master)](https://travis-ci.org/LeakyAbstractions/git-info)
+
 # git-info
 
 > Extract information from the GIT repository
