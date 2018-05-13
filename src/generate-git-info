@@ -9,7 +9,7 @@
 GENERATED_FILE=${1:-deps/git-info.h}
 
 #
-# Extracts information
+# Extract information
 #
 echo "Extracting info from GIT repository..."
 GENERATION_DATE=`                   date -Iminute`
@@ -58,7 +58,7 @@ if [ -n "$GIT_INFO_NOTES" ]; then
 fi
 
 #
-# Generates file
+# Generate file
 #
 echo "Generating file: $GENERATED_FILE"
 mkdir -p `dirname $GENERATED_FILE`
@@ -97,11 +97,17 @@ ${GIT_INFO_NOTES:-    `echo '""'`}
 #endif
 EOF
 
+#
+# Check generated file
+#
 if [ ! -f $GENERATED_FILE ]; then
     >&2 echo -e "\033[0;31mError: Could not generate $GENERATED_FILE\033[0m"
     exit 1;
 fi
 
+#
+# Show info
+#
 echo -e "\033[1;34m"
 echo "    GIT_INFO_ORIGIN:  $GIT_INFO_ORIGIN"
 echo "    GIT_INFO_BRANCH:  $GIT_INFO_BRANCH"
