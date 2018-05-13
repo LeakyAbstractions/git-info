@@ -18,7 +18,7 @@ int main(void){
     printf("GIT_INFO_NOTES: %s\n",                  GIT_INFO_NOTES);
     printf("GIT_INFO_AUTHOR_NAME: %s\n",            GIT_INFO_AUTHOR_NAME);
     printf("GIT_INFO_AUTHOR_EMAIL: %s\n",           GIT_INFO_AUTHOR_EMAIL);
-    printf("GIT_INFO_AUTHOR_TIMESTAMP: %s\n",       GIT_INFO_AUTHOR_TIMESTAMP);
+    printf("GIT_INFO_AUTHOR_TIMESTAMP: %d\n",       GIT_INFO_AUTHOR_TIMESTAMP);
     printf("GIT_INFO_AUTHOR_DATE: %s\n",            GIT_INFO_AUTHOR_DATE);
     printf("GIT_INFO_AUTHOR_DATE_RFC2822: %s\n",    GIT_INFO_AUTHOR_DATE_RFC2822);
     printf("GIT_INFO_AUTHOR_DATE_ISO8601: %s\n",    GIT_INFO_AUTHOR_DATE_ISO8601);

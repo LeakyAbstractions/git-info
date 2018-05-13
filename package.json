@@ -1,6 +1,6 @@
 {
   "name":           "git-info",
-  "version":        "0.1.0.2",
+  "version":        "0.1.0.3",
   "description":    "A shell script to generate header files with GIT information",
   "repo":           "LeakyAbstractions/git-info",
   "license":        "GPL",
