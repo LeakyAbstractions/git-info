@@ -3,7 +3,7 @@
 #
 # Extracts information from the GIT repository and generates a header file
 #
-# version   0.1.0.1
+# version   0.1.0.2
 # author    Copyright (c) 2018 Guillermo Calvo
 #
 GENERATED_FILE=${1:-deps/git-info.h}
@@ -14,7 +14,7 @@ GENERATED_FILE=${1:-deps/git-info.h}
 echo "Extracting info from GIT repository..."
 GENERATION_DATE=`                   date -Iminute`
 GIT_INFO_ORIGIN=`                   git remote get-url origin 2>/dev/null`
-GIT_INFO_BRANCH=`                   git status -bsuno 2>/dev/null | head -n 1 | grep -oP '(?<=## )(.*)(?=\.\.\..*)?'`
+GIT_INFO_BRANCH=`                   git symbolic-ref --short HEAD 2>/dev/null`
 GIT_INFO_HASH=`                     git log -1 --format=%H 2>/dev/null`
 GIT_INFO_TAG=`                      git log -1 --format=%d 2>/dev/null | grep -oP '(?<=tag\: )(.+?)(?=[,\)])' | head -n1`
 GIT_INFO_SUBJECT=`                  git log -1 --format=%s 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
@@ -32,6 +32,22 @@ GIT_INFO_COMMITTER_TIMESTAMP=`      git log -1 --format=%ct 2>/dev/null`
 GIT_INFO_COMMITTER_DATE=`           git log -1 --format=%ci 2>/dev/null`
 GIT_INFO_COMMITTER_DATE_RFC2822=`   git log -1 --format=%cD 2>/dev/null`
 GIT_INFO_COMMITTER_DATE_ISO8601=`   git log -1 --format=%cI 2>/dev/null`
+
+# Handle 'detached HEAD' state
+if [ -z "$GIT_INFO_BRANCH" ]; then
+    echo "Detached HEAD state detected. Looking for branches matching HEAD..."
+    # Try local branches
+    GIT_INFO_BRANCH=`git show-ref 2>/dev/null | grep "$GIT_INFO_HASH" | grep -Po '(?<=refs/heads/)(.*)' | head -n 1`
+    # Try origin branches
+    [ -z "$GIT_INFO_BRANCH" ] && GIT_INFO_BRANCH=`git show-ref 2>/dev/null | grep "$GIT_INFO_HASH" | grep -Po '(?<=refs/remotes/origin/)(.*)' | head -n 1`
+    # Try remote branches
+    [ -z "$GIT_INFO_BRANCH" ] && [ -n "$GIT_INFO_ORIGIN" ] && GIT_INFO_BRANCH=`git ls-remote | grep '$GIT_INFO_HASH' | grep -Po '(?<=refs/heads/)(.*)' | head -n 1`
+    if [ -z "$GIT_INFO_BRANCH" ]; then
+        # No such branch; show the working tree status
+        GIT_INFO_BRANCH=`git show -s --pretty=%d HEAD 2>/dev/null`
+        [ -n "$GIT_INFO_BRANCH" ] && GIT_INFO_BRANCH="No branch$GIT_INFO_BRANCH"
+    fi
+fi
 
 #
 # Generates file
@@ -54,10 +70,10 @@ cat > $GENERATED_FILE <<- EOF
 #define GIT_INFO_TAG                    "$GIT_INFO_TAG"
 #define GIT_INFO_SUBJECT                "$GIT_INFO_SUBJECT"
 #define GIT_INFO_BODY                   \\
-$GIT_INFO_BODY
+${GIT_INFO_BODY:-    \\}
     ""
 #define GIT_INFO_NOTES                  \\
-$GIT_INFO_NOTES
+${GIT_INFO_NOTES:-    \\}
     ""
 #define GIT_INFO_AUTHOR_NAME            "$GIT_INFO_AUTHOR_NAME"
 #define GIT_INFO_AUTHOR_EMAIL           "$GIT_INFO_AUTHOR_EMAIL"
