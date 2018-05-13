@@ -1,0 +1,18 @@
+language: c
+
+script:
+  - echo travis_fold:start:AUTORECONF
+  - autoreconf --install
+  - echo travis_fold:end:AUTORECONF
+
+  - echo travis_fold:start:CONFIGURE
+  - ./configure
+  - echo travis_fold:end:CONFIGURE
+
+  - echo travis_fold:start:INSTALL
+  - sudo make install
+  - echo travis_fold:end:INSTALL
+
+  - echo travis_fold:start:TESTS
+  - make tests
+  - echo travis_fold:end:TESTS
