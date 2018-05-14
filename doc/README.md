@@ -82,7 +82,7 @@ access the defined macros containing repository info:
 #define GIT_INFO_BODY                   \
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" \
     "Nulla eu mi mauris. Sed nec consectetur velit.\n" \
-    "In vulputate lorem sed mattis auctor. Donec sed accumsan nisl.\n"
+    "In vulputate lorem sed mattis auctor. Donec sed accumsan nisl."
 #define GIT_INFO_NOTES                  \
     ""
 #define GIT_INFO_AUTHOR_NAME            "Guillermo Calvo"
