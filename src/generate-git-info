@@ -51,10 +51,10 @@ fi
 
 # Handle multiline fields
 if [ -n "$GIT_INFO_BODY" ]; then
-    GIT_INFO_BODY=`echo "$GIT_INFO_BODY" | sed -E 's/(.+)/    "\1\\\n" \\\/' | sed -Ez 's/(.*) \\\[\r\n]?/\1/' | tr -d '\r'`
+    GIT_INFO_BODY=`echo "$GIT_INFO_BODY" | sed -E 's/(.+)/    "\1\\\n" \\\/' | sed -Ez 's/(.*)\\\n" \\\[\r\n]?/\1"/' | tr -d '\r'`
 fi
 if [ -n "$GIT_INFO_NOTES" ]; then
-    GIT_INFO_NOTES=`echo "$GIT_INFO_NOTES" | sed -E 's/(.+)/    "\1\\\n" \\\/' | sed -Ez 's/(.*) \\\[\r\n]?/\1/' | tr -d '\r'`
+    GIT_INFO_NOTES=`echo "$GIT_INFO_NOTES" | sed -E 's/(.+)/    "\1\\\n" \\\/' | sed -Ez 's/(.*)\\\n" \\\[\r\n]?/\1"/' | tr -d '\r'`
 fi
 
 #
