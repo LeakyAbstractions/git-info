@@ -87,13 +87,13 @@ access the defined macros containing repository info:
     ""
 #define GIT_INFO_AUTHOR_NAME            "Guillermo Calvo"
 #define GIT_INFO_AUTHOR_EMAIL           "guillermocalvo@yahoo.com"
-#define GIT_INFO_AUTHOR_TIMESTAMP       "1526173216"
+#define GIT_INFO_AUTHOR_TIMESTAMP       1526173216L
 #define GIT_INFO_AUTHOR_DATE            "2018-05-13 10:00:16 +0900"
 #define GIT_INFO_AUTHOR_DATE_RFC2822    "Sun, 13 May 2018 10:00:16 +0900"
 #define GIT_INFO_AUTHOR_DATE_ISO8601    "2018-05-13T10:00:16+09:00"
 #define GIT_INFO_COMMITTER_NAME         "Guillermo Calvo"
 #define GIT_INFO_COMMITTER_EMAIL        "guillermocalvo@yahoo.com"
-#define GIT_INFO_COMMITTER_TIMESTAMP    1526200041
+#define GIT_INFO_COMMITTER_TIMESTAMP    1526200041L
 #define GIT_INFO_COMMITTER_DATE         "2018-05-13 17:27:21 +0900"
 #define GIT_INFO_COMMITTER_DATE_RFC2822 "Sun, 13 May 2018 17:27:21 +0900"
 #define GIT_INFO_COMMITTER_DATE_ISO8601 "2018-05-13T17:27:21+09:00"
