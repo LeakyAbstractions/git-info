@@ -17,9 +17,9 @@ GIT_INFO_ORIGIN=`                   git remote get-url origin 2>/dev/null`
 GIT_INFO_BRANCH=`                   git symbolic-ref --short HEAD 2>/dev/null`
 GIT_INFO_HASH=`                     git log -1 --format=%H 2>/dev/null`
 GIT_INFO_TAG=`                      git log -1 --format=%d 2>/dev/null | grep -oP '(?<=tag\: )(.+?)(?=[,\)])' | head -n1`
-GIT_INFO_SUBJECT=`                  git log -1 --format=%s 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
-GIT_INFO_BODY=`                     git log -1 --format=%b 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
-GIT_INFO_NOTES=`                    git log -1 --format=%N 2>/dev/null | tr "\42" "'" | tr "\134" "/"`
+GIT_INFO_SUBJECT=`                  git log -1 --format=%s 2>/dev/null | sed -E 's/(\\\)/\1\1/g' | sed -E 's/"/\\\"/g'`
+GIT_INFO_BODY=`                     git log -1 --format=%b 2>/dev/null | sed -E 's/(\\\)/\1\1/g' | sed -E 's/"/\\\"/g'`
+GIT_INFO_NOTES=`                    git log -1 --format=%N 2>/dev/null | sed -E 's/(\\\)/\1\1/g' | sed -E 's/"/\\\"/g'`
 GIT_INFO_AUTHOR_NAME=`              git log -1 --format=%an 2>/dev/null`
 GIT_INFO_AUTHOR_EMAIL=`             git log -1 --format=%ae 2>/dev/null`
 GIT_INFO_AUTHOR_TIMESTAMP=`         git log -1 --format=%at 2>/dev/null`
