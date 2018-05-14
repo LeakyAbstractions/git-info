@@ -7,7 +7,7 @@ AC_PREREQ([2.68])
 
 
 # Initialize package
-AC_INIT([git-info], [0.1.0.4], [git-info@guillermo.in], [git-info], [https://github.com/LeakyAbstractions/git-info/])
+AC_INIT([git-info], [0.1.0.5], [git-info@guillermo.in], [git-info], [https://github.com/LeakyAbstractions/git-info/])
 
 
 # Information on the package

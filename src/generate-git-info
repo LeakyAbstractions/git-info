@@ -3,7 +3,7 @@
 #
 # Extracts information from the GIT repository and generates a header file
 #
-# version   0.1.0.4
+# version   0.1.0.5
 # author    Copyright (c) 2018 Guillermo Calvo
 #
 GENERATED_FILE=${1:-deps/git-info.h}
