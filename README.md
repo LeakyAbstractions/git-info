@@ -125,7 +125,7 @@ can re-generate it easily when you need to update the repository info.
 
 Copyright 2018 [Guillermo Calvo](https://github.com/guillermocalvo)
 
-[![](https://resume.guillermo.in/assets/images/thumb.png)](https://guillermo.in/)
+[![](https://resume.guillermo.in/assets/images/thumb.png)](https://guillermo.in/) [![Greenkeeper badge](https://badges.greenkeeper.io/LeakyAbstractions/git-info.svg)](https://greenkeeper.io/)
 
 
 ## License
